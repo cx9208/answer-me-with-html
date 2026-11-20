@@ -16,7 +16,7 @@ const filled = (file) => ({ ...file, author: 'Tester', description: { en: 'A tes
 const fields = (name, data, existing = CATALOG) => M.checkTheme({ name, data, existing }).problems.map((p) => p.field);
 
 test('builtinThemeFile: every page theme becomes a theme file that passes the catalog rules once a name is set', () => {
-  for (const name of ['blueprint', 'shadcn', 'paper']) {
+  for (const name of ['blueprint', 'shadcn', 'paper', 'ctg']) {
     const file = filled(M.startFrom(M.builtinThemeFile(name)));
     assert.deepEqual(fields(`my-${name}`, file), [], name);
     assert.ok(fields(name, file).includes('name'), `${name}: a built-in name is taken`);
@@ -53,13 +53,13 @@ test('startFrom: a copy with version 1.0.0, the MIT license and no author, whate
 
 test('startChoices: the page themes first, then the catalog, with the label of the language', () => {
   const index = { themes: [{ name: 'comic', label: { en: 'Comic', zh: '漫画' } }, { name: 'plain' }] };
-  assert.deepEqual(M.startChoices(index).map((c) => c.value), ['blueprint', 'shadcn', 'paper', 'comic', 'plain']);
-  assert.deepEqual(M.startChoices(index).map((c) => c.kind), ['builtin', 'builtin', 'builtin', 'catalog', 'catalog']);
+  assert.deepEqual(M.startChoices(index).map((c) => c.value), ['blueprint', 'shadcn', 'paper', 'ctg', 'comic', 'plain']);
+  assert.deepEqual(M.startChoices(index).map((c) => c.kind), ['builtin', 'builtin', 'builtin', 'builtin', 'catalog', 'catalog']);
   const zh = M.startChoices(index, 'zh');
   assert.equal(zh.find((c) => c.value === 'comic').label, '漫画');
   assert.equal(zh.find((c) => c.value === 'plain').label, 'plain', 'no label: the name');
   assert.equal(zh.find((c) => c.value === 'paper').label, '纸张');
-  assert.equal(M.startChoices(undefined).length, 3);
+  assert.equal(M.startChoices(undefined).length, 4);
 });
 
 test('formatThemeFile: the bytes the Action commits, and the check reads exactly those', () => {

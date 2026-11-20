@@ -77,6 +77,7 @@ test('themes: decoration rules apply only under their own theme', async () => {
   }
   assert.match(html, /html\[data-theme="blueprint"\] \.am-frame \{/);
   assert.match(html, /html\[data-theme="shadcn"\] \.am-panel-id \{/);
+  assert.match(html, /html\[data-theme="ctg"\] \.am-intro \{/);
   assert.match(video, /html\[data-video\]\[data-theme="3b1b"\] \.amv-scene-head \{/);
   assert.doesNotMatch(html, /data-theme="3b1b"/, 'video-only themes stay out of pages');
 });

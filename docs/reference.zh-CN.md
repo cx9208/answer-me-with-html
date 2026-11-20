@@ -7,7 +7,7 @@
 ````markdown
 ---
 template: sheet        # sheet 是多面板网格（默认），doc 是单栏长文加大纲条
-theme: auto            # auto（默认）：长文用 paper，有图表用 blueprint；也可写 blueprint、shadcn、paper 或你自己的主题
+theme: auto            # auto（默认）：长文用 paper，有图表用 blueprint；也可写 blueprint、shadcn、paper、ctg 或你自己的主题
 title: 页面标题
 subtitle: 一句话说明
 file: tcp-handshake    # 文件名；标题里没有或只有很少 ASCII 字母时使用（见输出）
@@ -458,7 +458,7 @@ am serve --tailscale  # 只监听 Tailscale 地址；tailnet 内的任何设备�
 | 配置项 | 默认值 | 作用 |
 | :--- | :--- | :--- |
 | `open` | `on` | 生成后自动用浏览器打开。嫌弹窗打扰就关掉 |
-| `theme` | `auto` | 默认主题：`auto`（长文用 paper，有图表用 blueprint）、`blueprint`、`shadcn`、`paper`，或你自己的主题 |
+| `theme` | `auto` | 默认主题：`auto`（长文用 paper，有图表用 blueprint）、`blueprint`、`shadcn`、`paper`、`ctg`，或你自己的主题 |
 | `mode` | `auto` | 默认明暗：`auto`、`light` 或 `dark` |
 | `style` | `80` | 写作检查：`off`、`80`（只提醒）或 `strict`（不达标不生成） |
 | `scale` | `1` | 页面文字大小：0.8–1.5，步长 0.05。1.2 表示放大 20%；图表跟着变大。工具栏的 A− / A+ 也能调整；选择会记在这个浏览器里，并优先于这个设置，但在 `am serve` 下只在当前标签页内有效 |

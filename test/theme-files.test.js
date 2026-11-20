@@ -52,7 +52,7 @@ test('font: a user theme with font bangers embeds the Bangers face once on every
   assert.equal(html.match(BANGERS_FACE)?.length, 1);
   assert.match(html, /SIL Open Font License/);
   // A page with a built-in theme carries every installed user theme, so it can switch to stripe and needs the face too.
-  for (const theme of ['blueprint', 'shadcn', 'paper']) {
+  for (const theme of ['blueprint', 'shadcn', 'paper', 'ctg']) {
     const page = renderDoc(DRAFT, { theme }, {}, { themes }).html;
     assert.equal(page.match(BANGERS_FACE)?.length, 1, `${theme} page carries the face of an installed user theme`);
     assert.match(page, /<option value="stripe"/, `${theme} page lists stripe`);
