@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { COMPONENTS, ComponentError } from '../src/components/index.js';
-import { niceScale } from '../src/components/limits.js';
+import { niceScale, limitScale } from '../src/components/limits.js';
 
 const ctx = (args = '') => ({ args, uid: () => 'u1' });
 const render = (name, text, args) => COMPONENTS.get(name).render(text, ctx(args));
@@ -62,6 +62,23 @@ test('niceScale: the axis maximum is rounded up with headroom, at most 7 ticks',
     const { max, step } = niceScale(v);
     assert.ok(max >= v * 1.2 && max / step <= 7, `v=${v} → ${max}/${step}`);
   }
+});
+
+test('limitScale: a percentage within 100 stops at 100; a small one or one past 100 keeps the headroom', () => {
+  assert.deepEqual(limitScale(95, '%'), { max: 100, step: 25 });
+  assert.deepEqual(limitScale(100, '%'), { max: 100, step: 25 });
+  assert.deepEqual(limitScale(60, '%'), niceScale(60), 'already within 100');
+  assert.deepEqual(limitScale(5, '%'), niceScale(5), 'a small percentage keeps its own scale');
+  assert.deepEqual(limitScale(105, '%'), niceScale(105), 'past 100: headroom');
+  assert.deepEqual(limitScale(95, 'ms'), niceScale(95), 'other units: unchanged');
+  assert.deepEqual(limitScale(95), niceScale(95));
+});
+
+test('limits: a percentage row with a 95 limit draws 90.31 at 90.31% of the bar', () => {
+  const html = render('limits', '防护率 | 90.31 / 95 | %');
+  assert.match(html, /am-lim-fill" style="width: 90.31%"/);
+  assert.match(html, /am-lim-mark" style="left: 95%"/);
+  assert.match(html, />100<\/span><\/div>/, 'the last tick is 100');
 });
 
 test('limits: value / limit → fill width, limit mark, unit', () => {

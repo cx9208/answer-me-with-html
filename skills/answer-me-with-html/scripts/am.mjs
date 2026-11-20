@@ -5372,6 +5372,11 @@ function niceScale(peak) {
   const step = [...NICE_STEP.map((s) => s * stepPow / 10), ...NICE_STEP.map((s) => s * stepPow)].find((s) => max / s <= 7 && Number.isInteger(round(max / s)) && (integral ? s >= 1 : true)) ?? max;
   return { max: round(max), step: round(step) };
 }
+function limitScale(peak, unit = "") {
+  const scale = niceScale(peak);
+  const percent2 = ["%", "\uFF05"].includes(unit.trim());
+  return percent2 && peak <= 100 && scale.max > 100 ? { max: 100, step: 25 } : scale;
+}
 var round = (n) => Math.round(n * 1e3) / 1e3;
 var pct = (v, max) => `${Math.round(v / max * 1e4) / 100}%`;
 var NUM = /^(?:max\s+)?(-?\d+(?:\.\d+)?)$/i;
@@ -5404,7 +5409,7 @@ function parseRow(t, line) {
 var EN_WORDS = { value: "{value} / max {limit}", limit: "max {limit}" };
 var fill = (template, value, limit) => template.replace("{value}", value).replace("{limit}", limit);
 function rowHtml({ label, value, limit, unit, note: note2 }, side = "left", words3 = EN_WORDS) {
-  const { max, step } = niceScale(Math.max(limit, value ?? 0));
+  const { max, step } = limitScale(Math.max(limit, value ?? 0), unit);
   const shown2 = value ?? limit;
   const over2 = value !== null && value > limit;
   const valText = `${value !== null ? fill(words3.value, value, limit) : fill(words3.limit, value, limit)}${unit ? ` ${unit}` : ""}`;

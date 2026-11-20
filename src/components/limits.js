@@ -18,6 +18,14 @@ export function niceScale(peak) {
   return { max: round(max), step: round(step) };
 }
 
+// A percentage stops at 100: when the headroom would carry the axis past 100 (a peak above about 71) but the values stay within 100,
+// the axis is 0-100, so 90% fills nine tenths of the bar. A small percentage (3 / 5 %) keeps its own scale, so its bar stays readable.
+export function limitScale(peak, unit = '') {
+  const scale = niceScale(peak);
+  const percent = ['%', '\uff05'].includes(unit.trim()); // \uff05: the full-width percent sign
+  return percent && peak <= 100 && scale.max > 100 ? { max: 100, step: 25 } : scale;
+}
+
 const round = (n) => Math.round(n * 1000) / 1000;
 const pct = (v, max) => `${Math.round((v / max) * 10000) / 100}%`;
 const NUM = /^(?:max\s+)?(-?\d+(?:\.\d+)?)$/i;
@@ -57,7 +65,7 @@ const fill = (template, value, limit) => template.replace('{value}', value).repl
 
 // side: where the scale starts, the left, or the right on a right-to-left page.
 function rowHtml({ label, value, limit, unit, note }, side = 'left', words = EN_WORDS) {
-  const { max, step } = niceScale(Math.max(limit, value ?? 0));
+  const { max, step } = limitScale(Math.max(limit, value ?? 0), unit);
   const shown = value ?? limit;
   const over = value !== null && value > limit;
   const valText = `${value !== null ? fill(words.value, value, limit) : fill(words.limit, value, limit)}${unit ? ` ${unit}` : ''}`;
