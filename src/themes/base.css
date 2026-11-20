@@ -77,6 +77,11 @@ code, pre, kbd { font-family: var(--font-mono); }
 .am-panel-meta { align-self: center; padding: 0 12px; font: var(--am-fs-label)/1.3 var(--font-mono); color: var(--ink-2); text-align: end; }
 .am-panel-body { padding: 14px 16px 16px; }
 .am-panel-body > * + * { margin-top: 12px; }
+/* The panel body's padding is the inset of its first block, and the gap above every other block is 12px. A component's own
+   margin (.am-kv, .am-diagram, .am-timeline: margin 0; .am-intro: margin-top) comes later in this file and would win over the
+   rule above, so blocks touched or stood further off; .am-panel in front makes these two rules win. */
+.am-panel .am-panel-body > :first-child { margin-top: 0; }
+.am-panel .am-panel-body > * + * { margin-top: 12px; }
 
 /* ── Markdown body ───────────────────────── */
 .am-md > :first-child { margin-top: 0; }
@@ -102,6 +107,10 @@ code, pre, kbd { font-family: var(--font-mono); }
 .am-md td { padding: 7px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
 .am-md tbody tr:nth-child(even) td { background: var(--fill); }
 .am-table-wrap { overflow-x: auto; }
+/* A table or an image in prose has no margin of its own, so the paragraph, list or quote after it touched it. It stands 12px off
+   the text on both sides; a heading above it stays close (its own 6px), and the last block keeps no bottom margin (.am-md > :last-child). */
+.am-md > :is(.am-table-wrap, .am-figure):not(:last-child) { margin-bottom: 12px; }
+.am-md > :is(p, ul, ol, blockquote) + :is(.am-table-wrap, .am-figure) { margin-top: 12px; }
 /* A table short of room (src/runtime/layout-dom.js fitTables) breaks a long word inside its cell rather than hold its column at full width. */
 .am-table-wrap > table.am-table-fit th, .am-table-wrap > table.am-table-fit td, .am-table-wrap > table.am-table-fit :not(pre) > code { overflow-wrap: anywhere; }
 /* Images scale down to the panel and never past 70% of the window height, keeping their shape. */
