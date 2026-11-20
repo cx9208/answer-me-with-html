@@ -679,6 +679,12 @@ body.am-has-reply-bar { padding-block-end: 72px; }
   .am-lightbox-header { top: 8px; left: 12px; right: 12px; }
   .am-lightbox-stage { top: 46px; bottom: 12px; left: 12px; right: 12px; border-radius: max(var(--radius), 10px); }
 }
+@media (max-width: 560px) {
+  /* A phone fits two key-value columns: kv cols=4 at this width would leave each value about 80px, and a number breaks mid-word.
+     A cell fills its own column here; the span src/components/kv.js gives a short last row would add columns to the narrow grid. */
+  .am-kv { grid-template-columns: repeat(var(--kv-cols-narrow, var(--kv-cols, 2)), minmax(0, 1fr)); }
+  .am-kv-cell:not(.am-kv-cell--wide) { grid-column: auto !important; }
+}
 /* \u2500\u2500 Export menu \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
    A native popover (src/render.js exportMenu): the top layer keeps it clear of the toolbar's sideways scroll box on a phone. It stays
    hidden unless open; a browser without popovers gets the .is-open class from src/runtime/export-menu.js instead, and the runtime sets
@@ -2561,8 +2567,14 @@ var ctg_default = {
 & .am-lim-fill { background: var(--ctg-bar); }
 & .am-lim.is-over .am-lim-fill { background: var(--ctg-bar-over); }
 & .am-kv dd { color: var(--accent); font-weight: 700; font-size: var(--am-fs-stat); line-height: 1.2; }
+/* A title or key sentence that wraps splits into lines of even length, not a full line and one stray word. */
+& .am-head h1, & .am-intro p, & .am-panel--bare .am-md > h3, & .am-panel--bare .am-md > h3 + p { text-wrap: balance; }
 @media (max-width: 760px) {
   & .am-intro { margin-inline-end: 0; }
+}
+@media (max-width: 560px) {
+  & .am-panel--plain .am-kv dd { font-size: calc(var(--am-fs-stat) * 1.5); }
+  & .am-panel--bare .am-md > h3 + p { padding: 8px 12px; }
 }`
 };
 
@@ -5150,7 +5162,7 @@ key: value
     if (pos > 0) span[cells.length - 1] += cols - pos;
     const html = cells.map((c, i) => `<div class="am-kv-cell${c.wide ? " am-kv-cell--wide" : ""}"${span[i] > 1 ? ` style="grid-column: span ${span[i]}"` : ""}><dt>${esc(c.key)}</dt><dd>${mdInline(c.value)}</dd></div>`);
     if (!cells.length) throw new ComponentError("kv needs at least one key: value line", 1);
-    return `<dl class="am-kv" style="--kv-cols: ${cols}">${html.join("")}</dl>`;
+    return `<dl class="am-kv" style="--kv-cols: ${cols}; --kv-cols-narrow: ${Math.min(cols, 2)}">${html.join("")}</dl>`;
   }
 };
 

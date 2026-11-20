@@ -643,6 +643,12 @@ body.am-has-reply-bar { padding-block-end: 72px; }
   .am-lightbox-header { top: 8px; left: 12px; right: 12px; }
   .am-lightbox-stage { top: 46px; bottom: 12px; left: 12px; right: 12px; border-radius: max(var(--radius), 10px); }
 }
+@media (max-width: 560px) {
+  /* A phone fits two key-value columns: kv cols=4 at this width would leave each value about 80px, and a number breaks mid-word.
+     A cell fills its own column here; the span src/components/kv.js gives a short last row would add columns to the narrow grid. */
+  .am-kv { grid-template-columns: repeat(var(--kv-cols-narrow, var(--kv-cols, 2)), minmax(0, 1fr)); }
+  .am-kv-cell:not(.am-kv-cell--wide) { grid-column: auto !important; }
+}
 /* ── Export menu ─────────────────────────────
    A native popover (src/render.js exportMenu): the top layer keeps it clear of the toolbar's sideways scroll box on a phone. It stays
    hidden unless open; a browser without popovers gets the .is-open class from src/runtime/export-menu.js instead, and the runtime sets

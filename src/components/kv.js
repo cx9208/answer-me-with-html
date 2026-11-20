@@ -38,6 +38,6 @@ key: value
     if (pos > 0) span[cells.length - 1] += cols - pos;
     const html = cells.map((c, i) => `<div class="am-kv-cell${c.wide ? ' am-kv-cell--wide' : ''}"${span[i] > 1 ? ` style="grid-column: span ${span[i]}"` : ''}><dt>${esc(c.key)}</dt><dd>${mdInline(c.value)}</dd></div>`);
     if (!cells.length) throw new ComponentError('kv needs at least one key: value line', 1);
-    return `<dl class="am-kv" style="--kv-cols: ${cols}">${html.join('')}</dl>`;
+    return `<dl class="am-kv" style="--kv-cols: ${cols}; --kv-cols-narrow: ${Math.min(cols, 2)}">${html.join('')}</dl>`;
   },
 };

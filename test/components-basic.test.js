@@ -72,6 +72,11 @@ test('kv: cols values that already had a fallback keep it', () => {
   assert.match(render('kv', 'a: 1', 'cols=9'), /--kv-cols: 6/);
 });
 
+test('kv: a phone takes at most two columns, and a one-column kv stays one column', () => {
+  assert.match(render('kv', 'a: 1\nb: 2\nc: 3\nd: 4', 'cols=4'), /--kv-cols: 4; --kv-cols-narrow: 2"/);
+  assert.match(render('kv', 'a: 1', 'cols=1'), /--kv-cols: 1; --kv-cols-narrow: 1"/);
+});
+
 // ── timeline ──
 test('timeline: horizontal by default; * marks a highlight; the third column is the description', () => {
   const html = render('timeline', '1979 | 启动 | AECMA 开始研究\n*Now | 免费下载');

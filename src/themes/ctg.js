@@ -114,7 +114,13 @@ export default {
 & .am-lim-fill { background: var(--ctg-bar); }
 & .am-lim.is-over .am-lim-fill { background: var(--ctg-bar-over); }
 & .am-kv dd { color: var(--accent); font-weight: 700; font-size: var(--am-fs-stat); line-height: 1.2; }
+/* A title or key sentence that wraps splits into lines of even length, not a full line and one stray word. */
+& .am-head h1, & .am-intro p, & .am-panel--bare .am-md > h3, & .am-panel--bare .am-md > h3 + p { text-wrap: balance; }
 @media (max-width: 760px) {
   & .am-intro { margin-inline-end: 0; }
+}
+@media (max-width: 560px) {
+  & .am-panel--plain .am-kv dd { font-size: calc(var(--am-fs-stat) * 1.5); }
+  & .am-panel--bare .am-md > h3 + p { padding: 8px 12px; }
 }`,
 };
