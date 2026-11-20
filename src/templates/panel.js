@@ -15,7 +15,9 @@ export function panelHtml(panel, { cols = 3, grid = true, hints = {} } = {}) {
   const style = layout ? ` style="${layout}"` : '';
   const hinted = Math.floor(Number(hints.span));
   const data = grid && hinted >= 1 ? ` data-span="${Math.min(hinted, cols)}"` : '';
-  const cls = `${span > 1 ? ' am-span-wide' : ''}${attrs.bare ? ' am-panel--bare' : ''}`;
+  // look=tab-strong is a tab too, so it carries both classes.
+  const look = { tab: ' am-panel--tab', 'tab-strong': ' am-panel--tab am-panel--tab-strong', plain: ' am-panel--plain' }[attrs.look] ?? '';
+  const cls = `${span > 1 ? ' am-span-wide' : ''}${attrs.bare ? ' am-panel--bare' : ''}${look}`;
   const meta = attrs.meta ? `<span class="am-panel-meta">${esc(attrs.meta)}</span>` : '';
   const head = attrs.bare
     ? ''

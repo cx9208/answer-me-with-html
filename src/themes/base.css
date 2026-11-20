@@ -162,6 +162,23 @@ code, pre, kbd { font-family: var(--font-mono); }
 .am-panel:hover .am-comment-btn, .am-comment-btn:focus-visible, .am-comment-btn[aria-expanded="true"] { border-color: var(--line-2); color: var(--ink-2); }
 .am-panel .am-comment-btn.am-comment-btn--on { color: var(--accent); border-color: var(--accent); }
 .am-panel--bare { position: relative; }
+/* look=tab: the title is a tab on the top edge of the box, not a bar across it. The panel itself draws nothing; the head and the body draw the tab and the box. */
+.am-panel--tab { background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible; display: flex; flex-direction: column; }
+/* The layout script stretches the panels of a row to one height; the box is the body here, so the body takes the height the head leaves. */
+.am-panel--tab > .am-panel-body { flex: 1 1 auto; }
+.am-panel--tab > .am-panel-head {
+  align-self: flex-start; width: fit-content; min-width: min(40%, 320px); max-width: 100%; border: var(--bw) solid var(--line); border-bottom: 0;
+  border-radius: var(--radius) var(--radius) 0 0; background: var(--paper);
+}
+.am-panel--tab > .am-panel-body { background: var(--paper); border: var(--bw) solid var(--line); border-radius: 0 var(--radius) var(--radius) var(--radius); box-shadow: var(--shadow); }
+.am-panel--tab-strong > .am-panel-head { background: var(--head-bg); color: var(--head-fg); border-color: var(--head-bg); }
+.am-panel--tab-strong > .am-panel-head .am-panel-id { background: transparent; }
+/* look=plain: no box and no title bar; the title is a centred caption above the content, for a chart or a row of numbers. */
+.am-panel--plain { background: transparent; border: 0; box-shadow: none; }
+.am-panel--plain > .am-panel-head { border-bottom: 0; background: none; justify-content: center; min-height: 0; }
+.am-panel--plain > .am-panel-head .am-panel-id { background: none; color: var(--ink-3); min-width: 0; font-weight: 400; font-size: var(--am-fs-label); }
+.am-panel--plain > .am-panel-head h2 { justify-content: center; text-align: center; color: var(--accent); }
+.am-panel--plain > .am-panel-body { padding-top: 4px; }
 .am-panel--bare > .am-comment-btn { position: absolute; top: 4px; inset-inline-end: 0; }
 .am-comment { padding: 0 14px 12px; }
 .am-comment textarea, .am-reply textarea {

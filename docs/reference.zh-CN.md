@@ -26,7 +26,7 @@ A -> B: 标签
 ````
 
 - 每个 `## ` 开头的标题是一个面板。面板编号可以不写，会自动补上：前 26 个是 A 到 Z，再往后是 `P27`、`P28` 这样。自己写的编号必须唯一，而且和自动序列给的是同一套编号：`## P27 标题` 声明的就是 `P27`，后面的面板不会再自动拿到 `P27`。
-- `span=2` 让面板占两列，`rows=2` 让面板占两行，`bare` 会去掉面板的标题栏。`span` 和 `rows` 必须是整数，写成 `span=2.5` 这样的小数会报错。`span` 只是提示：页面会按内容调整每个面板的大小，宽表格和宽图不需要写 `span`。只有想让某个面板更突出时才写 `span`。`rows` 只对普通网格生效（关闭 JavaScript、打印和窄屏时）；浏览器里的对齐排版会忽略它。
+- `span=2` 让面板占两列，`rows=2` 让面板占两行，`bare` 会去掉面板的标题栏。`look=tab` 把标题画成框顶边上的页签，`look=tab-strong` 是强调色的页签，`look=plain` 不画框也不画标题栏，标题居中写在图表或一排数字上方。`span` 和 `rows` 必须是整数，写成 `span=2.5` 这样的小数会报错。`span` 只是提示：页面会按内容调整每个面板的大小，宽表格和宽图不需要写 `span`。只有想让某个面板更突出时才写 `span`。`rows` 只对普通网格生效（关闭 JavaScript、打印和窄屏时）；浏览器里的对齐排版会忽略它。
 - 组件也可以写成 VitePress、Docusaurus 那样的 `:::名称 参数` … `:::` 块，效果和围栏代码块完全一样，只认组件名称；`:::note` 和单独的 `:::` 仍按普通文字处理，块在冒号数不少于开头的那一行结束。
 - 在 Markdown 表格后紧接着写 `{table sort}`，读者就能点击表头排序，再点一次反向排序。右对齐的列，以及每个单元格都是数字或有效 ISO 日期的列，按值排序；其他列按文字排序。数字可以用逗号作千位分隔符，也可以带 `$` 前缀或 `%` 后缀，例如 `1,200`、`$900` 和 `12%`。按值排序的列里，可解析的值排在其他文字之前，数字按数值排序（包括大于 2^53 的整数），相同值保持原有行顺序；`2024-02-31` 这样不存在的日期按文字处理。`{table filter}` 增加一个不区分大小写的全文筛选框，`{table sort filter}` 同时开启两项。控件支持键盘操作，在打印和 PNG/PDF 导出时隐藏；没有 JavaScript 时不显示控件，但完整表格仍会渲染。不写属性的表格保持静态。
 - 组件覆盖不到的情况，可以用 ```` ```html ```` 或 ```` ```svg ```` 直接嵌入原始代码。页面带有内容安全策略（Content-Security-Policy），代码块里的脚本和内联事件处理器不会运行，也不会从网络加载任何内容。`html` 或 `svg` 块里有 `<script>` 时，`am render` 还会给出带稿件行号的警告。
@@ -357,7 +357,7 @@ am export page.html --pdf page.pdf --png out/
 | 部分 | 类名 |
 | :--- | :--- |
 | 页面头部 | `.am-head`、`.am-head h1`、`.am-head-meta`、`.am-intro` |
-| 面板 | `.am-panel`、`.am-panel--bare`、`.am-panel-head`、`.am-panel-head h2`、`.am-panel-id`、`.am-panel-meta`、`.am-panel-body` |
+| 面板 | `.am-panel`、`.am-panel--bare`、`.am-panel--tab`、`.am-panel--tab-strong`、`.am-panel--plain`、`.am-panel-head`、`.am-panel-head h2`、`.am-panel-id`、`.am-panel-meta`、`.am-panel-body` |
 | 内容 | `.am-md`、`.am-callout`、`.am-callout--ok`、`.am-callout--warn`、`.am-callout--err`、`.am-callout-title`、`.am-kv` |
 | 限值条 | `.am-lim`、`.am-lim.is-over`、`.am-lim-track`、`.am-lim-fill` |
 | 绘图框 | `.am-frame`、`.am-ruler` |

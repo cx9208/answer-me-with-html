@@ -135,6 +135,7 @@ Table status words: ok / no / warn (may carry text: "ok approved") → ✓ / ✗
 After a table, `{table sort}` enables header sorting, `{table filter}` adds a text filter; combine them as `{table sort filter}`.
 
 ## B {bare}            ← bare: no title bar (suits a kv title block)
+## C Chart {look=plain} ← look=tab | tab-strong | plain: the title as a tab, as a strong tab, or as a caption with no box
 ```
 
 - The panel letter ID can be omitted; it is assigned automatically. A capital letter and a space before a capitalized word is read as the ID, so write the ID before a title such as `A Miss Goes Unseen`: `## B A Miss Goes Unseen`.

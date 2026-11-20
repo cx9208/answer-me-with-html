@@ -201,6 +201,9 @@ function splitSections(lines, start, errors) {
       flushMd();
       current = { ...parseHeading(heading[1]), heading: line.trim(), line: i + 1, blocks: [] };
       errors.push(...Object.entries(current.attrs).map(([key, value]) => fractionalCount(key, value, i + 1, PANEL_COUNTS)).filter(Boolean));
+      if (current.attrs.look !== undefined && !PANEL_LOOKS.includes(current.attrs.look)) {
+        errors.push(new ParseError(`look must be one of: ${PANEL_LOOKS.join(' | ')}, not "${current.attrs.look === true ? '' : current.attrs.look}"`, i + 1));
+      }
       panels.push(current);
       continue;
     }
@@ -413,6 +416,9 @@ function stripLineComment(line) {
 // frontmatter key is shown as written in the meta line). Returns the ParseError for a fractional count, or null.
 const META_COUNTS = new Set(['cols']);
 const PANEL_COUNTS = new Set(['span', 'rows']);
+// look: how a panel is drawn (src/templates/panel.js gives it the class am-panel--<look>). tab: the title is a tab on the box's top edge;
+// tab-strong: the same tab in the strong color; plain: no box and no title bar, the title centred above the content (a chart or a row of numbers).
+export const PANEL_LOOKS = Object.freeze(['tab', 'tab-strong', 'plain']);
 
 function fractionalCount(key, value, line, keys) {
   if (!keys.has(key) || typeof value !== 'string' || !value.trim()) return null;

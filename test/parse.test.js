@@ -54,6 +54,18 @@ test('error: a fractional cols, span or rows is rejected where it is read (#308)
   );
 });
 
+test('error: an unknown look names the allowed values', () => {
+  for (const look of ['card', 'TAB', '']) {
+    assert.throws(
+      () => parseDoc(`## A 标题 {look=${look}}\nbody`),
+      (err) => err instanceof ParseError && err.line === 1 && err.message.startsWith('look must be one of: tab | tab-strong | plain'),
+      look,
+    );
+  }
+  assert.throws(() => parseDoc('## A 标题 {look}\nbody'), /look must be one of/);
+  for (const look of ['tab', 'tab-strong', 'plain']) assert.doesNotThrow(() => parseDoc(`## A 标题 {look=${look}}\nbody`), look);
+});
+
 test('a whole, out-of-range or non-numeric cols, span or rows keeps its fallback (#308)', () => {
   for (const value of ['3', 'abc', '0', '-2', '999999', '2.0']) {
     assert.doesNotThrow(() => parseDoc(`---\ncols: ${value}\n---\n## A {span=${value} rows=${value}}\nbody`), value);

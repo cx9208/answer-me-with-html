@@ -80,3 +80,9 @@ html[dir="rtl"] .am-ch-data[open] summary::before { transform: rotate(-90deg); }
 /* Numbers read left to right in every language and line up on their right edge, under the series name. */
 .am-ch-data td, .am-ch-data thead th { text-align: right; }
 .am-ch-data tbody tr:nth-child(even) > * { background: var(--fill); }
+/* A chart in a plain panel ends at its axis: the closed "Data" toggle sits in the top row beside the expand button instead of a row of
+   its own under the chart, so a box stretched beside it (look=tab) ends where the drawing ends. Opened, the table still follows the chart. */
+.am-panel--plain .am-chart { position: relative; }
+.am-panel--plain .am-ch-data { margin-top: 0; padding-top: 0; border-top: 0; }
+.am-panel--plain .am-ch-data > summary { position: absolute; top: 6px; inset-inline-start: 8px; }
+.am-panel--plain .am-ch-data[open] { margin-top: 8px; }

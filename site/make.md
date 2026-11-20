@@ -43,7 +43,7 @@ The file has these fields. Keep all of them.
 
 **Chart series tokens.** Optional, and they do not count toward the 8: `--series-1` `--series-2` `--series-3` `--series-4` `--series-5` `--series-6` color the bars, lines and slices of a `chart`. Leave them out and the chart uses a fixed palette, a light set and a dark set. A token you set should keep contrast 3:1 against `--paper`, in light and dark; a lower contrast is a warning, not an error, because the values are written on the chart and in its data table.
 
-**css.** It may target only these classes: `.am-head` `.am-head h1` `.am-head-meta` `.am-intro` `.am-panel` `.am-panel--bare` `.am-panel-head` `.am-panel-head h2` `.am-panel-id` `.am-panel-meta` `.am-panel-body` `.am-md` `.am-callout` `.am-callout--ok` `.am-callout--warn` `.am-callout--err` `.am-callout-title` `.am-kv` `.am-comment-btn` `.am-comment-btn--on` `.am-lim` `.am-lim.is-over` `.am-lim-track` `.am-lim-fill` `.am-frame` `.am-ruler`, plus elements such as `body`. Do not style diagrams with css (`.am-node`, `svg` and so on); use the diagram tokens.
+**css.** It may target only these classes: `.am-head` `.am-head h1` `.am-head-meta` `.am-intro` `.am-panel` `.am-panel--bare` `.am-panel--tab` `.am-panel--tab-strong` `.am-panel--plain` `.am-panel-head` `.am-panel-head h2` `.am-panel-id` `.am-panel-meta` `.am-panel-body` `.am-md` `.am-callout` `.am-callout--ok` `.am-callout--warn` `.am-callout--err` `.am-callout-title` `.am-kv` `.am-comment-btn` `.am-comment-btn--on` `.am-lim` `.am-lim.is-over` `.am-lim-track` `.am-lim-fill` `.am-frame` `.am-ruler`, plus elements such as `body`. Do not style diagrams with css (`.am-node`, `svg` and so on); use the diagram tokens.
 
 **Rules.**
 

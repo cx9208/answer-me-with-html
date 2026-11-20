@@ -271,6 +271,14 @@ test('render: the rows attribute spans rows; the bare attribute removes the pane
   assert.match(html, /<section class="am-panel am-panel--bare" id="panel-B">\n<div class="am-panel-body">/);
 });
 
+test('render: look=tab, tab-strong and plain give the panel its look class and keep its title bar', () => {
+  const { html } = renderDoc('## A 分析 {look=tab}\nx\n## B 结论 {look=tab-strong}\ny\n## C 趋势 {look=plain}\nz\n## D 普通\nw');
+  assert.match(html, /<section class="am-panel am-panel--tab" id="panel-A">\n<header class="am-panel-head">/);
+  assert.match(html, /<section class="am-panel am-panel--tab am-panel--tab-strong" id="panel-B">\n<header class="am-panel-head">/);
+  assert.match(html, /<section class="am-panel am-panel--plain" id="panel-C">\n<header class="am-panel-head">/);
+  assert.doesNotMatch(html.match(/<section class="([^"]*)" id="panel-D"/)[1], /am-panel--(tab|plain)/, 'no look: no look class');
+});
+
 test('sheet: when the next panel does not fit, the current row is filled with no gap', async () => {
   const { fillRows } = await import('../src/templates/sheet.js');
   const P = (span) => ({ attrs: span ? { span } : {} });
