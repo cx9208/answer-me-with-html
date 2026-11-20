@@ -2404,8 +2404,8 @@ var b1b_default = {
 };
 
 // src/themes/ctg.js
-var LIGHT_BRAND = { "--ctg-red": "#c00000", "--ctg-navy": "#004b74", "--ctg-band": "#f2f2f2", "--ctg-rule": "#d9d9d9" };
-var DARK_BRAND = { "--ctg-red": "#ff6b6b", "--ctg-navy": "#0f5f8f", "--ctg-band": "#1a2633", "--ctg-rule": "#2e3d4d" };
+var LIGHT_BRAND = { "--ctg-red": "#c00000", "--ctg-navy": "#004b74", "--ctg-band": "#f2f2f2", "--ctg-rule": "#d9d9d9", "--ctg-bar": "#6693ac", "--ctg-bar-over": "#d96666" };
+var DARK_BRAND = { "--ctg-red": "#ff6b6b", "--ctg-navy": "#0f5f8f", "--ctg-band": "#1a2633", "--ctg-rule": "#2e3d4d", "--ctg-bar": "#45708f", "--ctg-bar-over": "#ac4f53" };
 var ctg_default = {
   name: "ctg",
   summary: "CTG work report",
@@ -2503,6 +2503,9 @@ var ctg_default = {
 & .am-kv { border: 0; gap: 14px; }
 & .am-kv > * { border: 1.5px dashed var(--ctg-rule); padding: 10px 14px 12px; }
 & .am-kv dt { font: 600 var(--am-fs-body)/1.4 var(--font-sans); color: var(--ink); }
+& .am-lim-track { background: var(--paper); border-color: var(--ctg-rule); }
+& .am-lim-fill { background: var(--ctg-bar); }
+& .am-lim.is-over .am-lim-fill { background: var(--ctg-bar-over); }
 & .am-kv dd { color: var(--accent); font-weight: 700; font-size: var(--am-fs-stat); line-height: 1.2; }
 @media (max-width: 760px) {
   & .am-intro { margin-inline-end: 0; }
@@ -12049,6 +12052,11 @@ var THEME_SELECTORS = Object.freeze([
   // The panel comment button (inside the panel head) and its "has a comment" state, so it stays visible on a dark or coloured head.
   ".am-comment-btn",
   ".am-comment-btn--on",
+  // A limits row, its track and its fill (is-over marks a value past its limit), so a theme can give the bar enough contrast (ctg).
+  ".am-lim",
+  ".am-lim.is-over",
+  ".am-lim-track",
+  ".am-lim-fill",
   // The drawing frame and its rulers (blueprint).
   ".am-frame",
   ".am-ruler"

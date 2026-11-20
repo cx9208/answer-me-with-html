@@ -3,9 +3,10 @@
 import { SANS, MONO } from './fonts.js';
 
 // The two brand colors, the grey band behind the key message and the grey rule of panels and tables; the decoration css reads them.
+// --ctg-bar / --ctg-bar-over fill a limits bar: 3:1 or more against --paper, so the length reads (--accent-bg / --err-bg are about 1.1:1).
 // Built-in themes set no diagram tokens (test/diagram-tokens.test.js), so diagrams take their navy strokes from --line.
-const LIGHT_BRAND = { '--ctg-red': '#c00000', '--ctg-navy': '#004b74', '--ctg-band': '#f2f2f2', '--ctg-rule': '#d9d9d9' };
-const DARK_BRAND = { '--ctg-red': '#ff6b6b', '--ctg-navy': '#0f5f8f', '--ctg-band': '#1a2633', '--ctg-rule': '#2e3d4d' };
+const LIGHT_BRAND = { '--ctg-red': '#c00000', '--ctg-navy': '#004b74', '--ctg-band': '#f2f2f2', '--ctg-rule': '#d9d9d9', '--ctg-bar': '#6693ac', '--ctg-bar-over': '#d96666' };
+const DARK_BRAND = { '--ctg-red': '#ff6b6b', '--ctg-navy': '#0f5f8f', '--ctg-band': '#1a2633', '--ctg-rule': '#2e3d4d', '--ctg-bar': '#45708f', '--ctg-bar-over': '#ac4f53' };
 
 export default {
   name: 'ctg',
@@ -72,6 +73,9 @@ export default {
 & .am-kv { border: 0; gap: 14px; }
 & .am-kv > * { border: 1.5px dashed var(--ctg-rule); padding: 10px 14px 12px; }
 & .am-kv dt { font: 600 var(--am-fs-body)/1.4 var(--font-sans); color: var(--ink); }
+& .am-lim-track { background: var(--paper); border-color: var(--ctg-rule); }
+& .am-lim-fill { background: var(--ctg-bar); }
+& .am-lim.is-over .am-lim-fill { background: var(--ctg-bar-over); }
 & .am-kv dd { color: var(--accent); font-weight: 700; font-size: var(--am-fs-stat); line-height: 1.2; }
 @media (max-width: 760px) {
   & .am-intro { margin-inline-end: 0; }

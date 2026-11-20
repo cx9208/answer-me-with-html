@@ -359,6 +359,7 @@ am export page.html --pdf page.pdf --png out/
 | 页面头部 | `.am-head`、`.am-head h1`、`.am-head-meta`、`.am-intro` |
 | 面板 | `.am-panel`、`.am-panel--bare`、`.am-panel-head`、`.am-panel-head h2`、`.am-panel-id`、`.am-panel-meta`、`.am-panel-body` |
 | 内容 | `.am-md`、`.am-callout`、`.am-callout--ok`、`.am-callout--warn`、`.am-callout--err`、`.am-callout-title`、`.am-kv` |
+| 限值条 | `.am-lim`、`.am-lim.is-over`、`.am-lim-track`、`.am-lim-fill` |
 | 绘图框 | `.am-frame`、`.am-ruler` |
 | 评论按钮 | `.am-comment-btn`、`.am-comment-btn--on` |
 

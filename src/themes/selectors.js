@@ -11,6 +11,8 @@ export const THEME_SELECTORS = Object.freeze([
   '.am-md', '.am-callout', '.am-callout--ok', '.am-callout--warn', '.am-callout--err', '.am-callout-title', '.am-kv',
   // The panel comment button (inside the panel head) and its "has a comment" state, so it stays visible on a dark or coloured head.
   '.am-comment-btn', '.am-comment-btn--on',
+  // A limits row, its track and its fill (is-over marks a value past its limit), so a theme can give the bar enough contrast (ctg).
+  '.am-lim', '.am-lim.is-over', '.am-lim-track', '.am-lim-fill',
   // The drawing frame and its rulers (blueprint).
   '.am-frame', '.am-ruler',
 ]);

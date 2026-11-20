@@ -359,6 +359,7 @@ The classes your `css` may target stay stable: a later version keeps every one o
 | Page head | `.am-head`, `.am-head h1`, `.am-head-meta`, `.am-intro` |
 | Panel | `.am-panel`, `.am-panel--bare`, `.am-panel-head`, `.am-panel-head h2`, `.am-panel-id`, `.am-panel-meta`, `.am-panel-body` |
 | Content | `.am-md`, `.am-callout`, `.am-callout--ok`, `.am-callout--warn`, `.am-callout--err`, `.am-callout-title`, `.am-kv` |
+| Limits bar | `.am-lim`, `.am-lim.is-over`, `.am-lim-track`, `.am-lim-fill` |
 | Drawing frame | `.am-frame`, `.am-ruler` |
 | Comment button | `.am-comment-btn`, `.am-comment-btn--on` |
 
