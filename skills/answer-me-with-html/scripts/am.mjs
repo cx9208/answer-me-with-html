@@ -2430,8 +2430,8 @@ var b1b_default = {
 };
 
 // src/themes/ctg.js
-var LIGHT_BRAND = { "--ctg-red": "#c00000", "--ctg-navy": "#004b74", "--ctg-band": "#f2f2f2", "--ctg-rule": "#d9d9d9", "--ctg-bar": "#6693ac", "--ctg-bar-over": "#d96666" };
-var DARK_BRAND = { "--ctg-red": "#ff6b6b", "--ctg-navy": "#0f5f8f", "--ctg-band": "#1a2633", "--ctg-rule": "#2e3d4d", "--ctg-bar": "#45708f", "--ctg-bar-over": "#ac4f53" };
+var LIGHT_BRAND = { "--ctg-red": "#c00000", "--ctg-navy": "#004b74", "--ctg-band": "#f2f2f2", "--ctg-rule": "#d9d9d9", "--ctg-bar": "#6693ac", "--ctg-bar-over": "#d96666", "--ctg-tab-red": "#c00000" };
+var DARK_BRAND = { "--ctg-red": "#ff6b6b", "--ctg-navy": "#0f5f8f", "--ctg-band": "#1a2633", "--ctg-rule": "#2e3d4d", "--ctg-bar": "#45708f", "--ctg-bar-over": "#ac4f53", "--ctg-tab-red": "#b3261e" };
 var ctg_default = {
   name: "ctg",
   summary: "CTG work report",
@@ -2509,12 +2509,40 @@ var ctg_default = {
 & .am-panel:hover .am-panel-head .am-comment-btn { border-color: rgba(255, 255, 255, 0.5); color: #ffffff; }
 & .am-panel .am-panel-head .am-comment-btn.am-comment-btn--on { color: #ffffff; border-color: #ffffff; background: rgba(255, 255, 255, 0.16); }
 & .am-panel--bare .am-panel-head { background: none; }
+& .am-panel--bare { margin-top: 18px; }
+& .am-panel--tab > .am-panel-head { border: 0; border-radius: 0 12px 0 0; min-width: min(36%, 360px); min-height: 34px; }
+& .am-panel--tab > .am-panel-body { border: 1px solid var(--ctg-rule); border-radius: 0 6px 6px 6px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); }
+& .am-panel--tab-strong > .am-panel-head { background: var(--ctg-tab-red); }
+& .am-panel--plain > .am-panel-head { background: none; }
+& .am-panel--plain > .am-panel-head h2 { color: var(--ctg-red); letter-spacing: 0.04em; }
+& .am-panel--plain > .am-panel-head .am-panel-id { background: none; color: var(--ink-3); }
+& .am-panel.am-panel--plain .am-panel-head .am-comment-btn { color: var(--ink-3); }
+& .am-panel.am-panel--plain:hover .am-panel-head .am-comment-btn { border-color: var(--line-2); color: var(--ink-2); }
+& .am-panel.am-panel--plain .am-panel-head .am-comment-btn.am-comment-btn--on { color: var(--accent); border-color: var(--accent); background: none; }
+& .am-panel--plain .am-kv dd { font-size: calc(var(--am-fs-stat) * 1.9); line-height: 1.15; }
+& .am-panel--bare .am-md > h3 {
+  margin: 0 0 12px; color: var(--ctg-red); font-size: calc(var(--am-fs-title) * 0.9); font-weight: 700; line-height: 1.3;
+  letter-spacing: 0.02em; border-inline-start: 8px solid var(--ctg-red); padding-inline-start: 14px;
+}
+& .am-panel--bare .am-md > h3::before { content: none; }
+& .am-panel--bare .am-md > h3 + p {
+  margin: 0; padding: 8px 20px; background: var(--ctg-band);
+  color: var(--ctg-red); font-weight: 700; font-size: var(--am-fs-heading); text-align: center;
+}
+& .am-panel-body .am-md p, & .am-panel-body .am-md li { font-size: var(--am-fs-lead); line-height: 1.75; }
+& .am-panel-body .am-md li + li { margin-top: 6px; }
+/* Top-level items of a slide list stand apart (about half a line); nested items stay close to their parent. A box stretched to its row
+   keeps the items at the top and leaves the rest of its height white, as a slide does. */
+& .am-panel-body .am-md > ul > li + li, & .am-panel-body .am-md > ol > li + li { margin-top: 12px; }
+& .am-md table { font-size: var(--am-fs-body); }
 & .am-md strong { color: var(--accent); }
 & .am-md h3, & .am-md h4 { color: var(--accent); }
 & .am-md h3::before { content: "\u25A0"; margin-inline-end: 0.45em; }
-& .am-md ul { list-style-type: "\u27A2\u2002"; }
+& .am-md ul { list-style-type: "\u25A0\u2002"; }
 & .am-md ul ul { list-style-type: "\u2022\u2002"; }
 & .am-md li::marker { color: var(--accent); }
+& .am-md ul ul li::marker { font-size: 1.1em; }
+& .am-md em { font-style: normal; color: var(--ctg-red); }
 & .am-md table { border: 1px solid var(--ctg-rule); }
 & .am-md thead th {
   background: var(--ctg-navy); color: #ffffff; font: 700 var(--am-fs-text)/1.35 var(--font-sans);
